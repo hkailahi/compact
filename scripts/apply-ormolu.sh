@@ -16,3 +16,5 @@ scriptdir=$(dirname $0)
 shareddir="$scriptdir"/..
 
 find . -name "*.hs" -and -not -path "*/.stack-work/*" -exec ormolu --ghc-opt -XTypeApplications --ghc-opt -XPatternSynonyms -i {} \;
+
+echo "All files formatted with ormolu."
