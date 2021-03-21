@@ -5,9 +5,9 @@
 --  set.
 module Ch2.Entropy.Partial where
 
-import Relude
 import Ch2.Entropy
 import qualified Control.Monad.Bayes.Enumerator as Bayes
+import Relude
 
 unsafeShannonEntropy :: Ord a => Bayes.Enumerator a -> Natural
 unsafeShannonEntropy = shannonEntropy

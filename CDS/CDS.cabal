@@ -4,7 +4,7 @@ cabal-version: 1.18
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 498ec8e616c82d873c978e63dc891a1282d2eb43d3080ec961eb3af96ed03810
+-- hash: 60f8c3ecdd4c1de5eedddad498577761cedbf88e01cf5575d6d979b500e202e8
 
 name:           CDS
 version:        0.1.0.0
@@ -39,6 +39,7 @@ library
   ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
       diagrams:diagrams
+    , ormolu:ormolu
   build-depends:
       KMP
     , base
@@ -61,6 +62,7 @@ executable make-charts
   ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
       diagrams:diagrams
+    , ormolu:ormolu
   build-depends:
       CDS
     , Chart
@@ -93,6 +95,7 @@ test-suite spec
   ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
       diagrams:diagrams
+    , ormolu:ormolu
   build-depends:
       CDS
     , KMP

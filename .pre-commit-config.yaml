@@ -1,0 +1,10 @@
+fail_fast: true
+repos:
+
+-   repo: local
+    hooks:
+    - id: ormolu
+      name: ormolu
+      language: script
+      pass_filenames: false
+      entry: ./scripts/apply-ormolu.sh
