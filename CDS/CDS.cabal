@@ -1,10 +1,10 @@
-cabal-version: 1.12
+cabal-version: 1.18
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d961b2863f8a43990fdcb80eb55c90ddaa8a2d7aa22b0eca290e0bf6c1d83d9a
+-- hash: 498ec8e616c82d873c978e63dc891a1282d2eb43d3080ec961eb3af96ed03810
 
 name:           CDS
 version:        0.1.0.0
@@ -18,13 +18,93 @@ license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
+extra-doc-files:
+    images/LangmeadEmpiricalHuffman.png
+    images/LangmeadHOLeftContext.png
+    images/LangmeadHOLeftContextTree.png
+    images/LangmeadShannonMorse.png
+    images/LangmeadWorstCaseCards.png
 
-executable CDS
-  main-is: Main.hs
+library
+  exposed-modules:
+      Ch2.Coding
+      Ch2.Entropy
+      Ch2.Entropy.Partial
+      Main
   other-modules:
       Paths_CDS
   hs-source-dirs:
       src
+  default-extensions: AllowAmbiguousTypes ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFunctor DeriveGeneric DerivingStrategies DerivingVia EmptyDataDecls FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving ImportQualifiedPost InstanceSigs LambdaCase MultiParamTypeClasses NamedFieldPuns NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings PackageImports PolyKinds QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeApplications TypeFamilies TypeOperators ViewPatterns
+  ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-tool-depends:
+      diagrams:diagrams
   build-depends:
-      base >=4.7 && <5
+      KMP
+    , base
+    , bits
+    , containers
+    , monad-bayes
+    , optics
+    , relude
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+executable make-charts
+  main-is: make-charts.hs
+  other-modules:
+      Paths_CDS
+  hs-source-dirs:
+      scripts/Ch2
+  default-extensions: AllowAmbiguousTypes ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFunctor DeriveGeneric DerivingStrategies DerivingVia EmptyDataDecls FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving ImportQualifiedPost InstanceSigs LambdaCase MultiParamTypeClasses NamedFieldPuns NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings PackageImports PolyKinds QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeApplications TypeFamilies TypeOperators ViewPatterns
+  ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-tool-depends:
+      diagrams:diagrams
+  build-depends:
+      CDS
+    , Chart
+    , Chart-cairo
+    , Chart-diagrams
+    , KMP
+    , base
+    , bits
+    , colour
+    , containers
+    , diagrams
+    , lens
+    , monad-bayes
+    , optics
+    , relude
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Ch2.CodingSpec
+      Ch2.EntropySpec
+      Paths_CDS
+  hs-source-dirs:
+      test
+  default-extensions: AllowAmbiguousTypes ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFunctor DeriveGeneric DerivingStrategies DerivingVia EmptyDataDecls FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving ImportQualifiedPost InstanceSigs LambdaCase MultiParamTypeClasses NamedFieldPuns NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings PackageImports PolyKinds QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeApplications TypeFamilies TypeOperators ViewPatterns
+  ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
+  build-tool-depends:
+      diagrams:diagrams
+  build-depends:
+      CDS
+    , KMP
+    , QuickCheck
+    , base
+    , bits
+    , containers
+    , monad-bayes
+    , optics
+    , quickcheck-classes
+    , relude
+    , sydtest
+    , unordered-containers
+    , vector
   default-language: Haskell2010

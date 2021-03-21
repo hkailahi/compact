@@ -11,12 +11,98 @@ category:            Web
 extra-source-files:
 - README.md
 
+default-extensions:
+  - AllowAmbiguousTypes
+  - ConstraintKinds
+  - DataKinds
+  - DefaultSignatures
+  - DeriveDataTypeable
+  - DeriveFunctor
+  - DeriveGeneric
+  - DerivingStrategies
+  - DerivingVia
+  - EmptyDataDecls
+  - FlexibleContexts
+  - FlexibleInstances
+  - FunctionalDependencies
+  - GADTs
+  - GeneralizedNewtypeDeriving
+  - ImportQualifiedPost
+  - InstanceSigs
+  - LambdaCase
+  - MultiParamTypeClasses
+  - NamedFieldPuns
+  - NoImplicitPrelude
+  - NoMonomorphismRestriction
+  - OverloadedStrings
+  - PackageImports
+  - PolyKinds
+  - QuasiQuotes
+  - RankNTypes
+  - RecordWildCards
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TemplateHaskell
+  - TupleSections
+  - TypeApplications
+  - TypeFamilies
+  - TypeOperators
+  - ViewPatterns
+
 dependencies:
-  - base >= 4.7 && < 5
+  - base
+  - relude
   - bits
-  - lens
+  - containers
+  - monad-bayes
+  - optics
+  - unordered-containers
+  - vector
+  - KMP
+
+build-tools: # Dev dependencies
+  - diagrams
 
 executables:
-  CDS:
-    source-dirs:      src
-    main:             Main.hs
+  make-charts:
+    main: make-charts.hs
+    source-dirs: scripts/Ch2
+    dependencies:
+      - CDS
+      # External
+      - colour
+      - Chart
+      - Chart-cairo
+      - Chart-diagrams
+      - diagrams
+      - lens
+
+extra-doc-files:
+  images/*.png
+
+library:
+  source-dirs:      src
+
+ghc-options:
+  - -Wall
+  - -Werror
+  - -Wno-type-defaults
+  - -Wredundant-constraints
+  - -fwarn-tabs
+  - -O2
+  - -threaded
+  - -rtsopts
+  - -with-rtsopts=-N
+
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs:
+      - test
+    dependencies:
+      # Test
+      - sydtest
+      - QuickCheck
+      - quickcheck-classes
+      # Internal
+      - CDS
