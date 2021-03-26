@@ -11,7 +11,7 @@ that git forbids you from committing un-ormolized files. Here is an example on h
 to do it:
 
     echo "#! /usr/bin/env bash
-   ./scripts/check-ormolized" > .git/hooks/pre-commit
+   ./scripts/check-hlint" > .git/hooks/pre-commit
     chmod +x .git/hooks/pre-commit
 '
 }
@@ -24,7 +24,7 @@ fi
 PATCH_FILE=ormolu.patch
 
 echo "Checking style of haskell files"
-find . -name "*.hs" -and -not -path "*/.stack-work/*" -exec bash -c 'mydiff=$(diff {} <(ormolu --ghc-opt -XTypeApplications --ghc-opt -XPatternSynonyms {})); if test -n "$mydiff"; then echo "Not matching ormolu format: {}" ; fi;' \; | tee $PATCH_FILE
+find . -name "*.hs" -and -not -path "*/.stack-work/*" -exec bash -c 'mydiff=$(diff {} <(stack exec ormolu -- --ghc-opt -XTypeApplications --ghc-opt -XPatternSynonyms {})); if test -n "$mydiff"; then echo "Not matching ormolu format: {}" ; fi;' \; | tee $PATCH_FILE
 
 if [[ -s $PATCH_FILE ]]; then
   exit 1

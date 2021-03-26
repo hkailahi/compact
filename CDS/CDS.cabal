@@ -4,7 +4,7 @@ cabal-version: 1.18
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 60f8c3ecdd4c1de5eedddad498577761cedbf88e01cf5575d6d979b500e202e8
+-- hash: 55fa7a664476bdcd3d381d986e6deb074a5ad1e58e1940ab910f1d2bae1f9c3c
 
 name:           CDS
 version:        0.1.0.0
@@ -14,7 +14,6 @@ author:         Author name here
 maintainer:     example@example.com
 copyright:      2019 Author name here
 license:        BSD3
-license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
@@ -29,8 +28,6 @@ library
   exposed-modules:
       Ch2.Coding
       Ch2.Entropy
-      Ch2.Entropy.Partial
-      Main
   other-modules:
       Paths_CDS
   hs-source-dirs:
@@ -38,7 +35,7 @@ library
   default-extensions: AllowAmbiguousTypes ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFunctor DeriveGeneric DerivingStrategies DerivingVia EmptyDataDecls FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving ImportQualifiedPost InstanceSigs LambdaCase MultiParamTypeClasses NamedFieldPuns NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings PackageImports PolyKinds QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeApplications TypeFamilies TypeOperators ViewPatterns
   ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
-      diagrams:diagrams
+      hlint:hlint
     , ormolu:ormolu
   build-depends:
       KMP
@@ -46,6 +43,7 @@ library
     , bits
     , containers
     , monad-bayes
+    , multiset
     , optics
     , relude
     , unordered-containers
@@ -61,7 +59,7 @@ executable make-charts
   default-extensions: AllowAmbiguousTypes ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFunctor DeriveGeneric DerivingStrategies DerivingVia EmptyDataDecls FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving ImportQualifiedPost InstanceSigs LambdaCase MultiParamTypeClasses NamedFieldPuns NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings PackageImports PolyKinds QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeApplications TypeFamilies TypeOperators ViewPatterns
   ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
-      diagrams:diagrams
+      hlint:hlint
     , ormolu:ormolu
   build-depends:
       CDS
@@ -76,6 +74,7 @@ executable make-charts
     , diagrams
     , lens
     , monad-bayes
+    , multiset
     , optics
     , relude
     , unordered-containers
@@ -94,7 +93,7 @@ test-suite spec
   default-extensions: AllowAmbiguousTypes ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFunctor DeriveGeneric DerivingStrategies DerivingVia EmptyDataDecls FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving ImportQualifiedPost InstanceSigs LambdaCase MultiParamTypeClasses NamedFieldPuns NoImplicitPrelude NoMonomorphismRestriction OverloadedStrings PackageImports PolyKinds QuasiQuotes RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TemplateHaskell TupleSections TypeApplications TypeFamilies TypeOperators ViewPatterns
   ghc-options: -Wall -Werror -Wno-type-defaults -Wredundant-constraints -fwarn-tabs -O2 -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
-      diagrams:diagrams
+      hlint:hlint
     , ormolu:ormolu
   build-depends:
       CDS
@@ -104,6 +103,7 @@ test-suite spec
     , bits
     , containers
     , monad-bayes
+    , multiset
     , optics
     , quickcheck-classes
     , relude

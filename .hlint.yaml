@@ -1,0 +1,76 @@
+- ignore: {name: "Use if"}
+- ignore: {name: Redundant do}
+
+- arguments:
+  - -XArrows
+  - -XQuasiQuotes
+  - -XTypeApplications
+
+# Control which extensions/flags/modules/functions can be used
+- extensions:
+  - default: false # all extension are banned (in modules) by default
+  - name: [UndecidableInstances, DeriveAnyClass, DerivingStrategies] # these are used a bit
+
+- flags:
+  - default: false  # all are banned unless overridden here
+  # exceptions (manual, since hlint apparently can't handle a module name pattern)
+  - name: -fno-warn-orphans
+    within:
+      - []
+  - name: -fno-warn-deprecations
+    within:
+      - []
+
+- modules:
+  # some commonly-used library imports:
+  - {name: Data.ByteString.Char8, as: C8}
+  - {name: Data.ByteString.Lazy, as: LBS}
+  - {name: Data.CaseInsensitive, as: CI}
+  - {name: Data.Csv, as: Csv}
+  - {name: Data.HashMap.Lazy, as: Map}
+  - {name: Data.List.NonEmpty, as: NonEmpty}
+  - {name: Data.Set, as: Set}
+  - {name: Data.Text, as: Text}
+  - {name: Data.Vector, as: V}
+  - {name: Language.Haskell.TH, as: TH}
+  - {name: Options.Applicative, as: Opt}
+  - {name: System.Remote.Monitoring.Statsd, as: Statsd}
+  # some we don't want to ever use:
+  - {name: Control.Monad.Either, within: []}  # Use ExceptT, not EitherT
+  # lots of rules for our own modules to encourage consistency:
+
+- functions:
+  - {name: unsafePerformIO, within: []}
+  - {name: fail, within: []}  # used in scripts, parsers, etc.
+  - {name: fromJust, within: []}
+
+# Add custom hints for this project
+- error: {name: Use (<>), lhs: a ++ b, rhs: a <> b}
+
+# We never use return, always use pure
+- error: {name: Use (Applicative) pure, lhs: return x, rhs: pure x}
+
+# parseMaybe discards the parse error, and with it your major hope of ever figuring out what's wrong.
+- warning: {name: Use error-preserving parse, lhs: parseMaybe, rhs: parseEither}
+
+# Turn on hints that are off by default
+
+# Ban "module X(module X) where", to require a real export list
+# - warn: {name: Use explicit module export list}
+
+# Replace a $ b $ c with a . b $ c
+- group: {name: dollar, enabled: true}
+
+- group: {name: use-lens, enabled: true}
+
+# Generalise map to fmap, ++ to <>
+- group: {name: generalise, enabled: true}
+
+
+# Ignore some builtin hints
+# - ignore: {name: Use let}
+# - ignore: {name: Use const, within: SpecialModule} # Only within certain modules
+
+
+# Define some custom infix operators
+# - fixity: infixr 3 ~^#^~

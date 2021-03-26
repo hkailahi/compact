@@ -50,19 +50,22 @@ default-extensions:
   - ViewPatterns
 
 dependencies:
+  # Starter Pack
   - base
   - relude
-  - bits
   - containers
-  - monad-bayes
-  - optics
   - unordered-containers
   - vector
-  - KMP
+  # Remix
+  - bits
+  - KMP         # knuth-morris-pratt for fast substring matching
+  - monad-bayes # probability distributions
+  - multiset    # bags
+  - optics
 
 build-tools: # Dev dependencies
-  - diagrams
   - ormolu
+  - hlint
 
 executables:
   make-charts:

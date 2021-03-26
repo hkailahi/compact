@@ -21,9 +21,10 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 
+*stack.yaml.lock
+
 # Tools
 ormolu.patch
 
 # CDS
-CDS/stack.yaml.lock
 CDS/images/generated
