@@ -50,10 +50,10 @@ main = toFile def "images/generated/huffman-bar-chart.png" $ do
   layout_legend . _Just . legend_label_style . font_size .= 18
   layout_axes_styles . axis_label_style . font_size .= 18
   layout_axes_styles . axis_label_style . font_color .= opaque crimson
-  layout_x_axis . laxis_generate .= autoIndexAxis (map fst values)
+  layout_x_axis . laxis_generate .= autoIndexAxis (fmap fst values)
   let barStyle = [(FillStyleSolid (opaque blueviolet), Nothing)]
   plot
     . fmap (plotBars . set plot_bars_item_styles barStyle)
     . bars titles
     . addIndexes
-    $ map snd values
+    $ fmap snd values
